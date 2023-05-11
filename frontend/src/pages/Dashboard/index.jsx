@@ -37,7 +37,7 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <div className = "flex flex-col p-4 border-2 rounded-lg shadow-lg">
+            <div className = "flex flex-col p-4 border-2 rounded-lg shadow-lg mb-6">
                 <h1 className="self-center mb-4 font-poppins text-lg font-medium text-center">RELACIÓN ENTRE ENFERMEDADES CARDIOVASCULARES Y OTROS PADECIMIENTOS O HÁBITOS</h1>
                 <div className="flex flex-row justify-between items-center flex-wrap">
                     <div className="w-1/4">

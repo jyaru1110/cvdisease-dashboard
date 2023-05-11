@@ -27,9 +27,13 @@ const MapChart = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col">
+      {
+        content !== "" ? <h1 className="font-poppins self-center absolute text-2xl text-center">Personas con enfermedad cardiovascular en <b>{content}</b> </h1> :
+        <h1 className="font-poppins self-center font-medium text-2xl absolute text-center">Personas con enfermedad cardiovascular en el mundo</h1>
+      
+      }
     
-    <h1>Personas con enfermedad cardiovascular en {content}</h1>
     <ComposableMap
       projectionConfig={{
         rotate: [-10, 0, 0],
@@ -44,27 +48,24 @@ const MapChart = () => {
             geographies.map((geo) => {
               const d = data.find((s) => s.ISO3 === geo.id);
               return (
-                <>
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
                   fill={d ? colorScale(d["2017"]) : "#F5F4F6"}
                   onMouseEnter={() => {
-                    console.log(geo.properties.name);
-                    setContent(`${geo.properties.name}`);
+                    setContent(`${geo.properties.name}: ${d["2017"]}%`);
                   }}
                   onMouseLeave={() => {
                     setContent("");
                   }}
                 />
-                </>
               );
             })
           }
         </Geographies>
       )}
     </ComposableMap>
-    </>
+    </div>
   );
 };
 
