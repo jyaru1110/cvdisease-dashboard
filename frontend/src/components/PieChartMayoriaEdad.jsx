@@ -24,7 +24,7 @@ export default function PieChartMayoriaEdad() {
         labels: ["Mayor de 50 años", "Menor de 50 años"],
         datasets: [
             {
-                label: "% de personas con enfermedad cardiovascular",
+                label: "% de personas",
                 data: [(data_received.ma*100)/(data_received.ma+data_received.me), (data_received.me*100)/(data_received.ma+data_received.me)],
                 backgroundColor: [
                     "rgba(246, 227, 167, 0.2)",
@@ -39,9 +39,19 @@ export default function PieChartMayoriaEdad() {
         ]
     };
 
+    const options = {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: '% de personas con enfermedad que tienen más de 50 años',
+          }
+        },
+      };
+
     return (
         <div>
-            <Pie data={data} />
+            <Pie data={data} options={options}/>
         </div>
     );
 }

@@ -42,7 +42,12 @@ export default function BarChartSexo() {
           legend: {
             display: false,
           },
+          title:{
+            display: true,
+            text: 'Cantidad de personas con enfermedad cardiovascular por sexo'
+          }
         },
+
       };
 
     const data = {

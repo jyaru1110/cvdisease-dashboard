@@ -20,11 +20,14 @@ export default function PieChartDiabetes() {
         get_data();
     }, []);
 
+
+
+
     const data = {
         labels: ["Con diabetes", "Sin diabetes"],
         datasets: [
             {
-                label: "% de personas con enfermedad cardiovascular",
+                label: "% personas",
                 data: [(data_received.p*100)/(data_received.p+data_received.n), (data_received.n*100)/(data_received.p+data_received.n)],
                 backgroundColor: [
                     'rgba(88, 192, 79, 0.44)',
@@ -39,9 +42,19 @@ export default function PieChartDiabetes() {
         ]
     };
 
+    const options = {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: '% de personas con enfermedad cardiovascular y diabetes',
+          }
+        },
+      };
+
     return (
         <div>
-            <Pie data={data} />
+            <Pie data={data} options = {options}/>
         </div>
     );
 }

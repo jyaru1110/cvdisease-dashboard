@@ -17,14 +17,19 @@ const colorScale = scaleLinear()
 
 const MapChart = () => {
   const [data, setData] = useState([]);
+  const [content, setContent] = useState("");
 
   useEffect(() => {
-    csv(`vulnerability.csv`).then((data) => {
+    csv('vulnerability.csv').then((data) => {
       setData(data);
     });
+
   }, []);
 
   return (
+    <>
+    
+    <h1>Personas con enfermedad cardiovascular en {content}</h1>
     <ComposableMap
       projectionConfig={{
         rotate: [-10, 0, 0],
@@ -39,17 +44,27 @@ const MapChart = () => {
             geographies.map((geo) => {
               const d = data.find((s) => s.ISO3 === geo.id);
               return (
+                <>
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
                   fill={d ? colorScale(d["2017"]) : "#F5F4F6"}
+                  onMouseEnter={() => {
+                    console.log(geo.properties.name);
+                    setContent(`${geo.properties.name}`);
+                  }}
+                  onMouseLeave={() => {
+                    setContent("");
+                  }}
                 />
+                </>
               );
             })
           }
         </Geographies>
       )}
     </ComposableMap>
+    </>
   );
 };
 

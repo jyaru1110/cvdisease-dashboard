@@ -24,7 +24,7 @@ export default function PieChartSexo() {
         labels: ["Masculino", "Femenino"],
         datasets: [
             {
-                label: "% de personas con enfermedad cardiovascular",
+                label: "% de personas",
                 data: [(data_received.m*100)/(data_received.m+data_received.f), (data_received.f*100)/(data_received.m+data_received.f)],
                 backgroundColor: [
                     "rgba(54, 162, 235, 0.2)",
@@ -39,9 +39,19 @@ export default function PieChartSexo() {
         ]
     };
 
+    const options = {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: '% de personas con enfermedad cardiovascular por sexo',
+            }
+        },
+    };
+
     return (
         <div>
-            <Pie data={data} />
+            <Pie data={data} options={options}/>
         </div>
     );
 }

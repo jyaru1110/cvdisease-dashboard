@@ -72,9 +72,18 @@ export default function BarChartEdades() {
             }
         ],
       };
+      const options = {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Cantidad de personas con enfermedad cardiovascular por edad',
+          }
+        },
+      };
     return (
         <div>
-            <Bar data={data} />
+            <Bar data={data} options = {options} />
         </div>
     );
 }

@@ -24,7 +24,7 @@ export default function PieChartFumar() {
         labels: ["Fuma", "No fuma"],
         datasets: [
             {
-                label: "% de personas con enfermedad cardiovascular",
+                label: "% de personas",
                 data: [(data_received.p*100)/(data_received.p+data_received.n), (data_received.n*100)/(data_received.p+data_received.n)],
                 backgroundColor: [
                     'rgba(88, 192, 79, 0.44)',
@@ -39,9 +39,22 @@ export default function PieChartFumar() {
         ]
     };
 
+    const options = {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: '% de personas fumadoras con enfermedad cardiovascular',
+            font:{
+                size : 10
+            }
+          }
+        },
+      };
+
     return (
         <div>
-            <Pie data={data} />
+            <Pie data={data} options = {options}/>
         </div>
     );
 }
