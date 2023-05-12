@@ -12,18 +12,26 @@ import {
 const geoUrl = "features.json";
 
 const colorScale = scaleLinear()
-  .domain([0.29, 0.68])
+  .domain([1, 8])
   .range(["#ffedea", "#ff5233"]);
 
 const MapChart = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [content, setContent] = useState("");
 
-  useEffect(() => {
-    csv('vulnerability.csv').then((data) => {
-      setData(data);
-    });
 
+  const get_data = async () => {
+    const response = await fetch("http://localhost:3900/api/paises_cantidad");
+    const data = await response.json();
+    var labels_aux = {};
+    data.forEach(element => {
+        labels_aux[element.pais] = element.cantidad;
+    });
+    await setData(labels_aux);
+  };
+  useEffect(() => {
+    get_data();
+    console.log();
   }, []);
 
   return (
@@ -42,18 +50,18 @@ const MapChart = () => {
     >
       <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
       <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
-      {data.length > 0 && (
+      {Object.keys(data).length > 0 && (
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map((geo) => {
-              const d = data.find((s) => s.ISO3 === geo.id);
+              const d = data[geo.id];
               return (
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill={d ? colorScale(d["2017"]) : "#F5F4F6"}
+                  fill={d ? colorScale(d) : "#F5F4F6"}
                   onMouseEnter={() => {
-                    setContent(`${geo.properties.name}: ${d["2017"]}%`);
+                    setContent(`${geo.properties.name}: ${d}`);
                   }}
                   onMouseLeave={() => {
                     setContent("");
