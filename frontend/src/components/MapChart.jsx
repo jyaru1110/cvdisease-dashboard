@@ -29,8 +29,8 @@ const MapChart = () => {
   return (
     <div className="flex flex-col">
       {
-        content !== "" ? <h1 className="font-poppins self-center absolute text-2xl text-center">Personas con enfermedad cardiovascular en <b>{content}</b> </h1> :
-        <h1 className="font-poppins self-center font-medium text-2xl absolute text-center">Personas con enfermedad cardiovascular en el mundo</h1>
+        content !== "" ? <h1 className="font-poppins self-center absolute text-xl text-center">Personas con enfermedad cardiovascular en <b>{content}</b> </h1> :
+        <h1 className="font-poppins self-center font-medium text-xl absolute text-center">Personas con enfermedad cardiovascular en el mundo</h1>
       
       }
     
