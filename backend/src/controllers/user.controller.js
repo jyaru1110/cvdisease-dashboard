@@ -47,6 +47,12 @@ const get_cantidad_edad = async (req, res) => {
     res.json(result);
 }
 
+const get_paises_cantidad = async (req, res) => {
+    const connection = await get_connection();
+    const result = await connection.query('SELECT pais,COUNT(*) as cantidad from Perfil_Paciente inner join Medical_History on Medical_History.ID_paciente = Perfil_Paciente.ID where Medical_History.Enfermedad_card=1 GROUP BY pais');
+    res.json(result);
+}
+
 
 const get_cantidad_edad_negativo = async (req, res) => {
     const connection = await get_connection();
@@ -61,5 +67,6 @@ module.exports = {
     get_cantidad_mayoria_edad,
     get_cantidad_diabetes,
     get_cantidad_hipertension,
-    get_cantidad_fumar
+    get_cantidad_fumar,
+    get_paises_cantidad
 }
