@@ -21,7 +21,7 @@ export default function PieChartHipertension({pais}) {
         if (pais=='Todos')
             get_data(url_backend+"/cantidad_hipertension");
         else
-            get_data(url_backend+"http://localhost:3900/api/cantidad_hipertension/");
+            get_data(url_backend+"/cantidad_hipertension/"+pais);
     }, [pais]);
 
     const data = {
