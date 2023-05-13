@@ -14,7 +14,7 @@ const colorScale = scaleLinear()
   .domain([1, 8])
   .range(["#ffedea", "#ff5233"]);
 
-const MapChart = () => {
+const MapChart = ({pais}) => {
   const [data, setData] = useState({});
   const [content, setContent] = useState("");
 
@@ -30,7 +30,6 @@ const MapChart = () => {
   };
   useEffect(() => {
     get_data();
-    console.log();
   }, []);
 
   return (
@@ -46,6 +45,10 @@ const MapChart = () => {
         rotate: [-10, 0, 0],
         scale: 147
       }}
+      style={{
+        width: "100%",
+        margin: "-10% 0 0 0",
+      }}
     >
       <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
       <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
@@ -59,6 +62,7 @@ const MapChart = () => {
                   key={geo.rsmKey}
                   geography={geo}
                   fill={d ? colorScale(d) : "#F5F4F6"}
+                  stroke={pais == geo.id ? "#FFC200" : ""}
                   onMouseEnter={() => {
                     setContent(`${geo.properties.name}: ${d?d:0}`);
                   }}
