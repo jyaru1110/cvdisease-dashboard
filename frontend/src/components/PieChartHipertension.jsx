@@ -7,18 +7,21 @@ import { useState,useEffect } from "react";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 
-export default function PieChartHipertension() {
+export default function PieChartHipertension({pais}) {
     const [data_received, setData] = useState({p: 0, n: 0});
 
-    const get_data = async () => {
-        const response = await fetch("http://localhost:3900/api/cantidad_hipertension");
+    const get_data = async (url) => {
+        const response = await fetch(url);
         const data = await response.json();
         await setData(data);
     };
 
     useEffect(() => {
-        get_data();
-    }, []);
+        if (pais=='Todos')
+            get_data("http://localhost:3900/api/cantidad_hipertension");
+        else
+            get_data("http://localhost:3900/api/cantidad_hipertension/");
+    }, [pais]);
 
     const data = {
         labels: ["Con hipertensión", "Sin hipertensión"],
