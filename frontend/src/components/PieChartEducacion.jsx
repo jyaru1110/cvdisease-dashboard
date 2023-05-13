@@ -7,11 +7,11 @@ import { useState,useEffect } from "react";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 
-export default function PieChartEducacion() {
+export default function PieChartEducacion({pais}) {
     const [data_received, setData] = useState();
 
-    const get_data = async () => {
-        const response = await fetch("http://localhost:3900/api/cantidad_educacion");
+    const get_data = async (url) => {
+        const response = await fetch(url);
         const data = await response.json();
         const data_aux = [];
         data.forEach(element => {
@@ -21,8 +21,11 @@ export default function PieChartEducacion() {
     };
 
     useEffect(() => {
-        get_data();
-    }, []);
+        if (pais == "Todos")
+            get_data("http://localhost:3900/api/cantidad_educacion");
+        else
+            get_data("http://localhost:3900/api/cantidad_educacion/" + pais);
+    }, [pais]);
 
     const data = {
         labels: ["Nivel 1", "Nivel 2", "Nivel 3", "Nivel 4"],

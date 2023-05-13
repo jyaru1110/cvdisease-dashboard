@@ -22,12 +22,12 @@ ChartJS.register(
 
 
 
-export default function BarChartEducacion() {
+export default function BarChartEducacion({pais}) {
     const [labels, setLabels] = useState([]);
     const [datos, setDatos] = useState([]);
     
-    const get_data = async () => {
-        const response = await fetch("http://localhost:3900/api/cantidad_educacion");
+    const get_data = async (url) => {
+        const response = await fetch(url);
         const data = await response.json();
         var labels_aux = [];
         var datos_aux = [];
@@ -40,8 +40,11 @@ export default function BarChartEducacion() {
     };
 
     useEffect(()=>{
-        get_data();
-    },[])
+      if(pais == "Todos")
+        get_data("http://localhost:3900/api/cantidad_educacion");
+      else
+        get_data("http://localhost:3900/api/cantidad_educacion/"+pais);
+    },[pais])
 
     const data = {
         labels,
