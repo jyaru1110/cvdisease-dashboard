@@ -11,7 +11,7 @@ import PieChartEducacion from "../../components/PieChartEducacion";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
-  const [paises, setPaises] = useState(["Todos"]);
+  const [paises, setPaises] = useState([{"pais":"Todos"}]);
   const [pais, setPais] = useState("Todos");
 
   const url_backend  = import.meta.env.VITE_URL_API;

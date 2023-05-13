@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,memo } from "react";
 import { scaleLinear } from "d3-scale";
 import {
   ComposableMap,
   Geographies,
   Geography,
-  Sphere,
-  Graticule
+  ZoomableGroup
 } from "react-simple-maps";
 
 const url_backend  = import.meta.env.VITE_URL_API;
@@ -20,7 +19,6 @@ const MapChart = ({pais,setPais}) => {
   const [data, setData] = useState({});
   const [content, setContent] = useState("Todos");
 
-
   const get_data = async () => {
     const response = await fetch(url_backend+"/paises_cantidad");
     const data = await response.json();
@@ -32,17 +30,16 @@ const MapChart = ({pais,setPais}) => {
   };
   useEffect(() => {
     get_data();
-    console.log(pais)
   }, [pais]);
 
   return (
     <div className="flex flex-col">
       {
-        content !== "Todos"? <h1 className="font-poppins self-center absolute text-base sm:text-xl text-center">Personas con enfermedad cardiovascular en <b>{content}</b> </h1>
+        content !== "Todos"? <h1 className="font-poppins self-center text-base sm:text-xl text-center">Personas con enfermedad cardiovascular en <b>{content}</b> </h1>
         :
         <>
         {
-          pais !== "Todos"? <h1 className="font-poppins self-center absolute text-base sm:text-xl text-center">Personas con enfermedad cardiovascular en <b>{pais}</b> </h1> : <h1 className="font-poppins self-center font-medium text-base sm:text-xl absolute text-center">Personas con enfermedad cardiovascular en el mundo</h1>
+          pais !== "Todos"? <h1 className="font-poppins self-center text-base sm:text-xl text-center">Personas con enfermedad cardiovascular en <b>{pais}</b> </h1> : <h1 className="font-poppins self-center font-medium text-base sm:text-xl text-center">Personas con enfermedad cardiovascular en el mundo</h1>
         }
         </>
       }
@@ -52,10 +49,9 @@ const MapChart = ({pais,setPais}) => {
         rotate: [-10, 0, 0],
         scale: 147
       }}
-      className="w-full xl:-mt-32 md:-m-14 sm:-m-12 m-0"
+      className="w-full "
     >
-      <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
-      <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
+      <ZoomableGroup zoom={1.5} center={[0,0]}>
       {Object.keys(data).length > 0 && (
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
@@ -78,6 +74,7 @@ const MapChart = ({pais,setPais}) => {
                         },
                         pressed: {
                           outline: "none",
+                          fill: "#FFC200",
                         }
                       },
                     } : {
@@ -103,7 +100,6 @@ const MapChart = ({pais,setPais}) => {
                   }}
                   onClick={() => {
                       setPais(geo.id);
-                      setContent(geo.id);
                     } 
                   }
                 />
@@ -112,9 +108,11 @@ const MapChart = ({pais,setPais}) => {
           }
         </Geographies>
       )}
+
+    </ZoomableGroup>
     </ComposableMap>
     </div>
   );
 };
 
-export default MapChart;
+export default memo(MapChart);
