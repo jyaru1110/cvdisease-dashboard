@@ -7,18 +7,21 @@ import { useState,useEffect } from "react";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 
-export default function PieChartSexo() {
+export default function PieChartSexo({pais}) {
     const [data_received, setData] = useState({m: 0, f: 0});
 
-    const get_data = async () => {
-        const response = await fetch("http://localhost:3900/api/cantidad_genero");
+    const get_data = async (url) => {
+        const response = await fetch(url);
         const data = await response.json();
         await setData(data);
     };
 
     useEffect(() => {
-        get_data();
-    }, []);
+        if(pais == "Todos")
+            get_data("http://localhost:3900/api/cantidad_genero");
+        else
+            get_data("http://localhost:3900/api/cantidad_genero/"+pais);
+    }, [pais]);
 
     const data = {
         labels: ["Masculino", "Femenino"],

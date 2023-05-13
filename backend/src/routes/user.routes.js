@@ -5,7 +5,7 @@ const {get_users,get_cantidad_genero,get_cantidad_edad,get_cantidad_edad_negativ
 router.get('/usuarios',get_users);
 //rutas de genero
 router.get('/cantidad_genero',get_cantidad_genero);
-router.get('/cantidad_genero_pais/:pais',get_cantidad_genero_pais);
+router.get('/cantidad_genero/:pais',get_cantidad_genero_pais);
 //rutas de edad
 router.get('/cantidad_edad',get_cantidad_edad);
 router.get('/cantidad_edad_pais/:pais',get_cantidad_edad_pais);
