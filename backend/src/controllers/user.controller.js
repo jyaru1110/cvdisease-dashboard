@@ -97,6 +97,13 @@ const get_cantidad_educacion = async (req, res) => {
     res.json(result);
 }
 
+const get_cantidad_educacion_pais = async (req, res) => {
+    const pais = req.params.pais;
+    const connection = await get_connection();
+    const result = await connection.query("select Perfil_Paciente.educacion, COUNT(*) as cantidad from Perfil_Paciente inner join Medical_History on Medical_History.ID_paciente = Perfil_Paciente.ID where Medical_History.Enfermedad_card = 1 and Perfil_Paciente.educacion and Perfil_Paciente.pais='"+pais+"' group by Perfil_Paciente.educacion;");
+    res.json(result);
+}
+
 const get_paises = async (req, res) => {
     const connection = await get_connection();
     const result = await connection.query('SELECT DISTINCT pais from Perfil_Paciente');
@@ -119,5 +126,6 @@ module.exports = {
     get_paises,
     get_cantidad_edad_negativo_pais,
     get_cantidad_mayoria_edad_pais,
-    get_cantidad_genero_pais
+    get_cantidad_genero_pais,
+    get_cantidad_educacion_pais
 }
