@@ -71,10 +71,10 @@ export default function Dashboard() {
 
         <div className="flex flex-row justify-between items-center flex-wrap">
           <div className="w-1/4">
-            <PieChartSexo />
+            <PieChartSexo pais={pais}/>
           </div>
           <div className="w-2/3">
-            <BarChartSexo />
+            <BarChartSexo pais={pais}/>
           </div>
         </div>
       </div>
@@ -85,10 +85,10 @@ export default function Dashboard() {
         </h1>
         <div className="flex flex-row justify-between items-center flex-wrap">
           <div className="w-1/4">
-            <PieChartEducacion />
+            <PieChartEducacion pais={pais}/>
           </div>
           <div className="w-2/3">
-            <BarChartEducacion />
+            <BarChartEducacion pais={pais}/>
           </div>
         </div>
       </div>
@@ -100,13 +100,13 @@ export default function Dashboard() {
         </h1>
         <div className="flex flex-row justify-between items-center flex-wrap">
           <div className="w-1/4">
-            <PieChartDiabetes />
+            <PieChartDiabetes pais={pais}/>
           </div>
           <div className="w-1/4">
-            <PieChartHipertension />
+            <PieChartHipertension pais={pais}/>
           </div>
           <div className="w-1/4">
-            <PieChartFumar />
+            <PieChartFumar pais={pais} />
           </div>
         </div>
       </div>

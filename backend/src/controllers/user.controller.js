@@ -13,6 +13,14 @@ const get_cantidad_genero = async (req, res) => {
     res.json({m: result[0].m, f: result2[0].f});
 }
 
+const get_cantidad_genero_pais = async (req, res) => {
+    const connection = await get_connection();
+    const pais = req.params.pais;
+    const result = await connection.query("SELECT COUNT(*) as m FROM Perfil_Paciente WHERE sexo = 'M' and exists (SELECT * FROM Medical_History WHERE Medical_History.ID_paciente = Perfil_Paciente.id and Medical_History.Enfermedad_card = 1) and pais='"+pais+"';");
+    const result2 = await connection.query("SELECT COUNT(*) as f FROM Perfil_Paciente WHERE sexo = 'F' and exists (SELECT * FROM Medical_History WHERE Medical_History.ID_paciente = Perfil_Paciente.id and Medical_History.Enfermedad_card = 1) and pais='"+pais+"';");
+    res.json({m: result[0].m, f: result2[0].f});
+}
+
 const get_cantidad_mayoria_edad = async (req, res) => {
     const connection = await get_connection();
     const result = await connection.query('select COUNT(*) as cantidad from Perfil_Paciente inner join Medical_History on Medical_History.ID_paciente = Perfil_Paciente.ID where Medical_History.Enfermedad_card=1 and Perfil_Paciente.edad >= 50;');
@@ -110,5 +118,6 @@ module.exports = {
     get_cantidad_educacion,
     get_paises,
     get_cantidad_edad_negativo_pais,
-    get_cantidad_mayoria_edad_pais
+    get_cantidad_mayoria_edad_pais,
+    get_cantidad_genero_pais
 }
