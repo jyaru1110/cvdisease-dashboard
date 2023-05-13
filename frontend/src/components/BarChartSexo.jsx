@@ -41,6 +41,7 @@ export default function BarChartSexo({pais}) {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             display: false,
@@ -72,7 +73,7 @@ export default function BarChartSexo({pais}) {
         ]
     };
     return (
-        <div>
+        <div className='sm:w-2/3 w-full m-auto h-80 md:h-96'>
             <Bar data={data} options={options}/>
         </div>
     );

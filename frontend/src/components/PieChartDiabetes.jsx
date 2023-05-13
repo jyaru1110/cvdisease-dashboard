@@ -44,6 +44,7 @@ export default function PieChartDiabetes({pais}) {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
@@ -53,7 +54,7 @@ export default function PieChartDiabetes({pais}) {
       };
 
     return (
-        <div>
+        <div className="lg:w-1/4 h-96 w-full">
             <Pie data={data} options = {options}/>
         </div>
     );

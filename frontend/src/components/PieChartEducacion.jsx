@@ -52,6 +52,7 @@ export default function PieChartEducacion({pais}) {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
@@ -61,7 +62,7 @@ export default function PieChartEducacion({pais}) {
       };
 
     return (
-        <div>
+        <div className="lg:w-1/4 w-2/3 m-auto h-96">
             <Pie data={data} options={options}/>
         </div>
     );

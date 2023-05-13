@@ -44,6 +44,7 @@ export default function PieChartHipertension({pais}) {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
@@ -56,7 +57,7 @@ export default function PieChartHipertension({pais}) {
       };
 
     return (
-        <div>
+        <div className="lg:w-1/4 h-96 w-full">
             <Pie data={data} options={options}/>
         </div>
     );

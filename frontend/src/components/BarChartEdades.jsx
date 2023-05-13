@@ -79,6 +79,7 @@ export default function BarChartEdades({pais}) {
       };
       const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
@@ -87,9 +88,9 @@ export default function BarChartEdades({pais}) {
         },
       };
     return (
-        <div>
-            <Bar data={data} options = {options} />
-        </div>
+      <div className="sm:w-2/3 w-full m-auto h-80 md:h-96">
+        <Bar data={data} options = {options} />
+      </div>     
     );
 }
                             
