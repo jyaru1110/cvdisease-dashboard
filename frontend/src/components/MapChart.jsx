@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { csv } from "d3-fetch";
 import { scaleLinear } from "d3-scale";
 import {
   ComposableMap,
@@ -61,7 +60,7 @@ const MapChart = () => {
                   geography={geo}
                   fill={d ? colorScale(d) : "#F5F4F6"}
                   onMouseEnter={() => {
-                    setContent(`${geo.properties.name}: ${d}`);
+                    setContent(`${geo.properties.name}: ${d?d:0}`);
                   }}
                   onMouseLeave={() => {
                     setContent("");
