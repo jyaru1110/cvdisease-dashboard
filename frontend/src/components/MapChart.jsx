@@ -18,7 +18,7 @@ const colorScale = scaleLinear()
 
 const MapChart = ({pais,setPais}) => {
   const [data, setData] = useState({});
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState("Todos");
 
 
   const get_data = async () => {
@@ -38,9 +38,13 @@ const MapChart = ({pais,setPais}) => {
   return (
     <div className="flex flex-col">
       {
-        pais !== "Todos" ? <h1 className="font-poppins self-center absolute text-base sm:text-xl text-center">Personas con enfermedad cardiovascular en <b>{pais}</b> </h1> :
-        <h1 className="font-poppins self-center font-medium text-base sm:text-xl absolute text-center">Personas con enfermedad cardiovascular en el mundo</h1>
-      
+        content !== "Todos"? <h1 className="font-poppins self-center absolute text-base sm:text-xl text-center">Personas con enfermedad cardiovascular en <b>{content}</b> </h1>
+        :
+        <>
+        {
+          pais !== "Todos"? <h1 className="font-poppins self-center absolute text-base sm:text-xl text-center">Personas con enfermedad cardiovascular en <b>{pais}</b> </h1> : <h1 className="font-poppins self-center font-medium text-base sm:text-xl absolute text-center">Personas con enfermedad cardiovascular en el mundo</h1>
+        }
+        </>
       }
     
     <ComposableMap
@@ -66,23 +70,40 @@ const MapChart = ({pais,setPais}) => {
                       style: {
                         default: {
                           fill: "#FFC200",
+                          outline: "none",
                         },
                         hover: {
                           fill: "#FFC200",
+                          outline: "none",
+                        },
+                        pressed: {
+                          outline: "none",
                         }
                       },
-                      
-                    } : {}
+                    } : {
+                      style: {
+                        default: {
+                          outline: "none",
+                        },
+                        hover: {
+                          outline: "none",
+                        },
+                        pressed: {
+                          outline: "none",
+                        }
+                      },
+                    }
                   }
                   fill={d ? colorScale(d) : "#F5F4F6"}
                   onMouseEnter={() => {
                     setContent(`${geo.properties.name}: ${d?d:0}`);
                   }}
                   onMouseLeave={() => {
-                    setContent("");
+                    setContent("Todos");
                   }}
                   onClick={() => {
                       setPais(geo.id);
+                      setContent(geo.id);
                     } 
                   }
                 />
