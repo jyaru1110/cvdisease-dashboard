@@ -19,7 +19,7 @@ ChartJS.register(
   Legend
 );
 
-
+const url_backend  = import.meta.env.VITE_URL_API;
 
 
 export default function BarChartEducacion({pais}) {
@@ -41,9 +41,9 @@ export default function BarChartEducacion({pais}) {
 
     useEffect(()=>{
       if(pais == "Todos")
-        get_data("http://localhost:3900/api/cantidad_educacion");
+        get_data(url_backend+"/cantidad_educacion");
       else
-        get_data("http://localhost:3900/api/cantidad_educacion/"+pais);
+        get_data(url_backend+"/cantidad_educacion/"+pais);
     },[pais])
 
     const data = {

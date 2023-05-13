@@ -6,6 +6,7 @@ import { useState,useEffect } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const url_backend  = import.meta.env.VITE_URL_API;
 
 export default function PieChartEducacion({pais}) {
     const [data_received, setData] = useState();
@@ -22,9 +23,9 @@ export default function PieChartEducacion({pais}) {
 
     useEffect(() => {
         if (pais == "Todos")
-            get_data("http://localhost:3900/api/cantidad_educacion");
+            get_data(url_backend+"/cantidad_educacion");
         else
-            get_data("http://localhost:3900/api/cantidad_educacion/" + pais);
+            get_data(url_backend+"http://localhost:3900/api/cantidad_educacion/" + pais);
     }, [pais]);
 
     const data = {

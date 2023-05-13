@@ -19,6 +19,8 @@ ChartJS.register(
   Legend
 );
 
+const url_backend  = import.meta.env.VITE_URL_API;
+
 
 
 
@@ -53,12 +55,12 @@ export default function BarChartEdades({pais}) {
 
     useEffect(()=>{
       if(pais == "Todos")
-      {   get_data("http://localhost:3900/api/cantidad_edad");
-          get_data_2("http://localhost:3900/api/cantidad_edad_negativo");
+      {   get_data(url_backend+"/cantidad_edad");
+          get_data_2(url_backend+"/cantidad_edad_negativo");
       }
       else
-      {   get_data("http://localhost:3900/api/cantidad_edad_pais/"+pais);
-          get_data_2("http://localhost:3900/api/cantidad_edad_negativo/"+pais);
+      {   get_data(url_backend+"/cantidad_edad_pais/"+pais);
+          get_data_2(url_backend+"/cantidad_edad_negativo/"+pais);
       }
     },[pais])
 

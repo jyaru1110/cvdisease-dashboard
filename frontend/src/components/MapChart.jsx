@@ -8,6 +8,8 @@ import {
   Graticule
 } from "react-simple-maps";
 
+const url_backend  = import.meta.env.VITE_URL_API;
+
 const geoUrl = "features.json";
 
 const colorScale = scaleLinear()
@@ -20,7 +22,7 @@ const MapChart = ({pais}) => {
 
 
   const get_data = async () => {
-    const response = await fetch("http://localhost:3900/api/paises_cantidad");
+    const response = await fetch(url_backend+"/paises_cantidad");
     const data = await response.json();
     var labels_aux = {};
     data.forEach(element => {

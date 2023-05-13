@@ -5,7 +5,7 @@ import { useState,useEffect } from "react";
 
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
+const url_backend  = import.meta.env.VITE_URL_API;
 
 export default function PieChartDiabetes({pais}) {
     const [data_received, setData] = useState({p: 0, n: 0});
@@ -18,9 +18,9 @@ export default function PieChartDiabetes({pais}) {
 
     useEffect(() => {
         if(pais == "Todos")
-            get_data("http://localhost:3900/api/cantidad_diabetes");
+            get_data(url_backend+"/cantidad_diabetes");
         else
-            get_data("http://localhost:3900/api/cantidad_diabetes/"+pais);
+            get_data(url_backend+"http://localhost:3900/api/cantidad_diabetes/"+pais);
     }, [pais]);
 
     const data = {

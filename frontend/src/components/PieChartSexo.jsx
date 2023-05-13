@@ -6,6 +6,7 @@ import { useState,useEffect } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const url_backend  = import.meta.env.VITE_URL_API;
 
 export default function PieChartSexo({pais}) {
     const [data_received, setData] = useState({m: 0, f: 0});
@@ -18,9 +19,9 @@ export default function PieChartSexo({pais}) {
 
     useEffect(() => {
         if(pais == "Todos")
-            get_data("http://localhost:3900/api/cantidad_genero");
+            get_data(url_backend+"/cantidad_genero");
         else
-            get_data("http://localhost:3900/api/cantidad_genero/"+pais);
+            get_data(url_backend+"http://localhost:3900/api/cantidad_genero/"+pais);
     }, [pais]);
 
     const data = {
