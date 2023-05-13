@@ -52,7 +52,7 @@ export default function PieChartEducacion() {
         plugins: {
           title: {
             display: true,
-            text: '% de personas con enfermedad por nivel educativo',
+            text: '# de personas con enfermedad por nivel educativo',
           }
         },
       };

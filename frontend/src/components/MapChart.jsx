@@ -61,8 +61,20 @@ const MapChart = ({pais}) => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
+                  {
+                    ...geo.id == pais ? {
+                      style: {
+                        default: {
+                          fill: "#FFC200",
+                        },
+                        hover: {
+                          fill: "#FFC200",
+                        }
+                      },
+                      
+                    } : {}
+                  }
                   fill={d ? colorScale(d) : "#F5F4F6"}
-                  stroke={pais == geo.id ? "#FFC200" : ""}
                   onMouseEnter={() => {
                     setContent(`${geo.properties.name}: ${d?d:0}`);
                   }}

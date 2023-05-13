@@ -32,7 +32,7 @@ export default function BarChartEducacion() {
         var labels_aux = [];
         var datos_aux = [];
         data.forEach(element => {
-            labels_aux.push("Nivel "+element.edad);
+            labels_aux.push("Nivel "+element.educacion);
             datos_aux.push(element.cantidad);
         });
         await setLabels(labels_aux);

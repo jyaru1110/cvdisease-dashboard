@@ -20,6 +20,14 @@ const get_cantidad_mayoria_edad = async (req, res) => {
     res.json({ma: result[0].cantidad, me: result2[0].cantidad});
 }
 
+const get_cantidad_mayoria_edad_pais = async (req, res) => {
+    const connection = await get_connection();
+    const pais = req.params.pais;
+    const result = await connection.query("select COUNT(*) as cantidad from Perfil_Paciente inner join Medical_History on Medical_History.ID_paciente = Perfil_Paciente.ID where Medical_History.Enfermedad_card=1 and Perfil_Paciente.edad >= 50 and Perfil_Paciente.pais='"+pais+"';");
+    const result2 = await connection.query("select COUNT(*) as cantidad from Perfil_Paciente inner join Medical_History on Medical_History.ID_paciente = Perfil_Paciente.ID where Medical_History.Enfermedad_card=1 and Perfil_Paciente.edad < 50 and Perfil_Paciente.pais='"+pais+"';");
+    res.json({ma: result[0].cantidad, me: result2[0].cantidad});
+}
+
 const get_cantidad_fumar = async (req, res) => {
     const connection = await get_connection();
     const result = await connection.query("select count(*) as cantidad from Perfil_Paciente inner join Habitos on Habitos.ID_paciente = Perfil_Paciente.ID inner join Medical_History on Medical_History.ID_paciente = Perfil_Paciente.ID where Habitos.fuma = 'YES' and Medical_History.Enfermedad_card = 1;");
@@ -101,5 +109,6 @@ module.exports = {
     get_paises_cantidad,
     get_cantidad_educacion,
     get_paises,
-    get_cantidad_edad_negativo_pais
+    get_cantidad_edad_negativo_pais,
+    get_cantidad_mayoria_edad_pais
 }
