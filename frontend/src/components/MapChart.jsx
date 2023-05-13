@@ -45,10 +45,7 @@ const MapChart = ({pais}) => {
         rotate: [-10, 0, 0],
         scale: 147
       }}
-      style={{
-        width: "100%",
-        margin: "-10% 0 0 0",
-      }}
+      className="w-full xl:-mt-32 md:-m-14 sm:-m-12 m-0"
     >
       <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
       <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
