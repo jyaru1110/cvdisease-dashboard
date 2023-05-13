@@ -16,7 +16,7 @@ const colorScale = scaleLinear()
   .domain([1, 8])
   .range(["#ffedea", "#ff5233"]);
 
-const MapChart = ({pais}) => {
+const MapChart = ({pais,setPais}) => {
   const [data, setData] = useState({});
   const [content, setContent] = useState("");
 
@@ -32,13 +32,14 @@ const MapChart = ({pais}) => {
   };
   useEffect(() => {
     get_data();
-  }, []);
+    console.log(pais)
+  }, [pais]);
 
   return (
     <div className="flex flex-col">
       {
-        content !== "" ? <h1 className="font-poppins self-center absolute text-xl text-center">Personas con enfermedad cardiovascular en <b>{content}</b> </h1> :
-        <h1 className="font-poppins self-center font-medium text-xl absolute text-center">Personas con enfermedad cardiovascular en el mundo</h1>
+        pais !== "Todos" ? <h1 className="font-poppins self-center absolute text-base sm:text-xl text-center">Personas con enfermedad cardiovascular en <b>{pais}</b> </h1> :
+        <h1 className="font-poppins self-center font-medium text-base sm:text-xl absolute text-center">Personas con enfermedad cardiovascular en el mundo</h1>
       
       }
     
@@ -80,6 +81,10 @@ const MapChart = ({pais}) => {
                   onMouseLeave={() => {
                     setContent("");
                   }}
+                  onClick={() => {
+                      setPais(geo.id);
+                    } 
+                  }
                 />
               );
             })

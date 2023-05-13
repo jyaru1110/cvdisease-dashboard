@@ -14,8 +14,9 @@ export default function Dashboard() {
   const [paises, setPaises] = useState(["Todos"]);
   const [pais, setPais] = useState("Todos");
 
+  const url_backend  = import.meta.env.VITE_URL_API;
   const get_data = async () => {
-    const response = await fetch("http://localhost:3900/api/paises");
+    const response = await fetch(url_backend+"/paises");
     const data = await response.json();
     await setPaises(data);
   };
@@ -38,18 +39,18 @@ export default function Dashboard() {
           setPais(e.target.value);
         }}
       >
-        <option key={"Todos"} value="Todos" className="z-50">
+        <option key={"Todos"} value="Todos" className="z-50" selected={pais=="Todos"?true:false}>
           Todo el mundo
         </option>
-        {paises.map((pais) => (
-          <option key={pais.pais} value={pais.pais} className="z-50">
-            {pais.pais}
+        {paises.map((pais_el) => (
+          <option key={pais_el.pais} value={pais_el.pais} className="z-50" selected={pais==pais_el.pais?true:false}>
+            {pais_el.pais}
           </option>
         ))}
       </select>
       </div>
 
-      <MapChart pais={pais} />
+      <MapChart pais={pais} setPais={setPais} />
 
       
       <div className="flex flex-col p-4 border-2 rounded-lg shadow-lg mb-6">

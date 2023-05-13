@@ -38,7 +38,7 @@ export default function BarChartSexo({pais}) {
         if(pais == "Todos")
             get_data(url_backend+"/cantidad_genero");
         else
-            get_data(url_backend+"http://localhost:3900/api/cantidad_genero/"+pais);
+            get_data(url_backend+"/cantidad_genero/"+pais);
     }, [pais]);
 
     const options = {

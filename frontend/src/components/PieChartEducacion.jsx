@@ -25,7 +25,7 @@ export default function PieChartEducacion({pais}) {
         if (pais == "Todos")
             get_data(url_backend+"/cantidad_educacion");
         else
-            get_data(url_backend+"http://localhost:3900/api/cantidad_educacion/" + pais);
+            get_data(url_backend+"/cantidad_educacion/" + pais);
     }, [pais]);
 
     const data = {

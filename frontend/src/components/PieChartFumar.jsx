@@ -21,7 +21,7 @@ export default function PieChartFumar({pais}) {
         if(pais == "Todos")
             get_data(url_backend+"/cantidad_fumar");
         else
-            get_data(url_backend+"http://localhost:3900/api/cantidad_fumar/"+pais);
+            get_data(url_backend+"/cantidad_fumar/"+pais);
     }, [pais]);
 
     const data = {

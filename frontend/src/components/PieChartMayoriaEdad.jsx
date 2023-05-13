@@ -20,7 +20,7 @@ export default function PieChartMayoriaEdad({pais}) {
         if(pais == "Todos")
             get_data(url_backend+"/cantidad_mayoria_edad");
         else
-            get_data(url_backend+"http://localhost:3900/api/cantidad_mayoria_edad/"+pais);
+            get_data(url_backend+"/cantidad_mayoria_edad/"+pais);
     }, [pais]);
 
     const data = {

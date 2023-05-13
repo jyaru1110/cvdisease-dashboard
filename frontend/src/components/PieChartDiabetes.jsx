@@ -20,7 +20,7 @@ export default function PieChartDiabetes({pais}) {
         if(pais == "Todos")
             get_data(url_backend+"/cantidad_diabetes");
         else
-            get_data(url_backend+"http://localhost:3900/api/cantidad_diabetes/"+pais);
+            get_data(url_backend+"/cantidad_diabetes/"+pais);
     }, [pais]);
 
     const data = {
