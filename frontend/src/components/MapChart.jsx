@@ -99,6 +99,7 @@ const MapChart = ({pais,setPais}) => {
                     setContent("Todos");
                   }}
                   onClick={() => {
+                      pais==geo.id?setPais("Todos"):
                       setPais(geo.id);
                     } 
                   }
