@@ -123,7 +123,8 @@ const get_cantidad_educacion = async (req, res) => {
 }
 
 const get_cantidad_educacion_pais = async (req, res) => {
-    const pais = req.params.pais;
+    let pais = req.params.pais;
+    pais = pais.replace(/_/g, " ");
     const connection = await get_connection();
     const result = await connection.query("select Perfil_Paciente.educacion, COUNT(*) as cantidad from Perfil_Paciente inner join Medical_History on Medical_History.ID_paciente = Perfil_Paciente.ID where Medical_History.Enfermedad_card = 1 and Perfil_Paciente.educacion and Perfil_Paciente.pais='"+pais+"' group by Perfil_Paciente.educacion;");
     res.json(result);
@@ -147,8 +148,22 @@ const get_pais_mas_casos = async (req, res) => {
     res.json(result);
 }
 
+const get_porcentaje_enfermos = async (req, res) => {
+    const connection = await get_connection();
+    const result = await connection.query('select sum(Medical_History.Enfermedad_card)/count(*) as porcentaje from Perfil_Paciente inner join Medical_History;');
+    res.json(result);
+}
+
+const get_mayor_nivel = async (req, res) => {
+    const connection = await get_connection();
+    const result = await connection.query('select  Perfil_Paciente.educacion,sum(Medical_History.Enfermedad_card) as cantidad from Perfil_Paciente inner join Medical_History on Perfil_Paciente.ID = Medical_History.ID_paciente WHERE Perfil_Paciente.educacion IS NOT NULL GROUP by Perfil_Paciente.educacion ORDER by cantidad limit 1');
+    res.json(result);
+}
+
 
 module.exports = {
+    get_mayor_nivel,
+    get_porcentaje_enfermos,
     get_pais_mas_casos,
     get_cantidad,
     get_users,

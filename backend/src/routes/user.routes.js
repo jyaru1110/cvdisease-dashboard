@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const router = Router();
-const {get_users,get_cantidad_genero,get_cantidad_edad,get_cantidad_edad_negativo,get_cantidad_mayoria_edad,get_cantidad_diabetes,get_cantidad_hipertension,get_cantidad_fumar,get_paises_cantidad,get_cantidad_educacion,get_paises,get_cantidad_edad_pais,get_cantidad_edad_negativo_pais,get_cantidad_mayoria_edad_pais,get_cantidad_genero_pais,get_cantidad_educacion_pais,get_cantidad_diabetes_pais,get_cantidad_fumar_pais,get_cantidad_hipertension_pais,get_cantidad,get_pais_mas_casos} = require('../controllers/user.controller');
+const {get_users,get_cantidad_genero,get_cantidad_edad,get_cantidad_edad_negativo,get_cantidad_mayoria_edad,get_cantidad_diabetes,get_cantidad_hipertension,get_cantidad_fumar,get_paises_cantidad,get_cantidad_educacion,get_paises,get_cantidad_edad_pais,get_cantidad_edad_negativo_pais,get_cantidad_mayoria_edad_pais,get_cantidad_genero_pais,get_cantidad_educacion_pais,get_cantidad_diabetes_pais,get_cantidad_fumar_pais,get_cantidad_hipertension_pais,get_cantidad,get_pais_mas_casos,get_porcentaje_enfermos,get_mayor_nivel} = require('../controllers/user.controller');
 
 router.get('/usuarios',get_users);
 //rutas de genero
@@ -29,5 +29,8 @@ router.get('/cantidad_educacion/:pais',get_cantidad_educacion_pais)
 //rutas para stats
 router.get('/cantidad',get_cantidad)
 router.get('/pais_mas_casos',get_pais_mas_casos)
+router.get('/porcentaje_enfermos',get_porcentaje_enfermos)
+router.get('/mayor_nivel',get_mayor_nivel)
+
 
 module.exports = router;
