@@ -8,6 +8,7 @@ import PieChartFumar from "../../components/PieChartFumar";
 import MapChart from "../../components/MapChart";
 import BarChartEducacion from "../../components/BarchartEducacion";
 import PieChartEducacion from "../../components/PieChartEducacion";
+import Stats from "../../components/Stats";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
@@ -49,7 +50,7 @@ export default function Dashboard() {
         ))}
       </select>
       </div>
-
+      <Stats></Stats>
       <MapChart pais={pais} setPais={setPais} />
 
       

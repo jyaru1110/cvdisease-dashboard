@@ -135,8 +135,22 @@ const get_paises = async (req, res) => {
     res.json(result);
 }
 
+const get_cantidad =  async (req, res) => {
+    const connection = await get_connection();
+    const result = await connection.query('select count(*) as cantidad from Perfil_Paciente inner join Medical_History on Medical_History.ID_paciente = Perfil_Paciente.ID WHERE Medical_History.Enfermedad_card = 1');
+    res.json(result);
+}
+
+const get_pais_mas_casos = async (req, res) => {
+    const connection = await get_connection();
+    const result = await connection.query('select pais, count(*) as cantidad from Perfil_Paciente inner join Medical_History on Medical_History.ID_paciente = Perfil_Paciente.ID WHERE Medical_History.Enfermedad_card = 1 group by pais order by cantidad desc limit 1');
+    res.json(result);
+}
+
 
 module.exports = {
+    get_pais_mas_casos,
+    get_cantidad,
     get_users,
     get_cantidad_genero,
     get_cantidad_edad,

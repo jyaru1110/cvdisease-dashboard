@@ -30,7 +30,7 @@ const MapChart = ({pais,setPais}) => {
   };
   useEffect(() => {
     get_data();
-  }, [pais]);
+  }, []);
 
   return (
     <div className="flex flex-col">
